@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <!-- <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">-->
+
+    <title>Student Performance</title>
+	<meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	      <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+	<link rel="stylesheet" type="text/css" href="StudentPerformanceHome.css">
+		<!-- Bootstrap core CSS -->
+   <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body >
+  {%if message%}
+  <div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong style="text-align:center ">{{message}}</strong>
+  </div>
+  {%endif%}
+ 
+
+    <div class="container">
+
+      <h2 style="text-align:center;">Student Performance</h2>
+        <form action="{{ url_for('predict') }}" method = "POST">
+    <div class="form-group">
+      <label for="name">Student Name</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select class="form-control" id="gender" name="gender" required>
+        <option value="0">Female</option>
+        <option value="1">Male</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input type="number" class="form-control" id="age" name="age"  min="15" max="22" required>
+    </div>
+    <div class="form-group">
+      <label for="Pstatus">parent's cohabitation status:</label>
+      <select class="form-control" id="Pstatus" name="Pstatus" required>
+        <option value="1">Living Together</option>
+        <option value="0">Apart</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="studytime">weekly study time:</label>
+      <select class="form-control" id="studytime" name="studytime" required>
+        <option value="1">less than 2 hours</option>
+        <option value="2">2 to 5 hours</option>
+        <option value="3">5 to 10 hours</option>
+        <option value="4">more than 10 hours</option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="schoolsup">Extra educational support:</label>
+      <select class="form-control" id="schoolsup" name="schoolsup" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="famsup">Family educational support:</label>
+      <select class="form-control" id="famsup" name="famsup" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="failures">Number of past class Failures:</label>
+      <select class="form-control" id="failures" name="failures" required>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">More than 4/option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="activities">Extra-Curricular Activities:</label>
+      <select class="form-control" id="activities" name="activities" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="nursery">Attended Nursery School:</label>
+      <select class="form-control" id="nursery" name="nursery" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="higher">Wants to take Higher Education:</label>
+      <select class="form-control" id="higher" name="higher">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="internet">Internet access at home:</label>
+      <select class="form-control" id="internet" name="internet" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="absences">Number of School Absences :</label>
+      <input type="number" class="form-control" id="absences" name="absences"  min="0" max="93" required>
+    </div>
+    <div class="form-group">
+      <label for="gone">Grade 1:</label>
+      <input type="number" class="form-control" id="gone" name="gone"  min="0" max="20" required>
+    </div>
+    <div class="form-group">
+      <label for="gtwo">Grade 2:</label>
+      <input type="number" class="form-control" id="gtwo" name="gtwo"  min="0" max="20" required >
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="reset" class="btn btn-default">Cancel</button>
+
+  </form>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
